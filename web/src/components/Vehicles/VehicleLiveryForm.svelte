@@ -5,11 +5,12 @@
   import { fetchNui } from "../../utils/fetchNui";
   const liveries = [1, 2, 3, 4, 5];
   const save = async (event: any) => {
-    let res = await fetchNui("him-getLivery", { index: 1 });
+    // let res = await fetchNui("him-getLivery", { index: 1 });
   };
 
   onMount(async () => {
-    let res = await fetchNui("him-getLivery", { index: 1 });
+    let res = await fetchNui("him-getLivery");
+    console.log(res.data);
   });
 </script>
 

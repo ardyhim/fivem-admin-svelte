@@ -25,8 +25,7 @@ RegisterNuiCallback("hideUI", (_, cb) => {
 
 RegisterNuiCallbackType('him-changeColorPrimary') // register the type
 // register a magic event name
-on('__cfx_nui:changeColor', (data, cb) => {
-  console.log(data);
+on('__cfx_nui:him-changeColorPrimary', (data, cb) => {
   const playerPed = PlayerPedId();
 
   // Retrieve the vehicle the player is currently in.
@@ -39,13 +38,12 @@ on('__cfx_nui:changeColor', (data, cb) => {
   }
 
   // Print the vehicle id
-  console.log(`Vehicle ID: ${vehicle}`);
   SetVehicleCustomPrimaryColour(vehicle, data.r, data.g, data.b);
   // cb([{ name: "hello color 1" }, { name: "hello color 2" }]);
-  cb(p)
+  cb()
 });
 
-RegisterCommand("him-getLivery", (_, cb) => {
+RegisterCommand("him-test", (_, cb) => {
   const playerPed = PlayerPedId();
 
   // Retrieve the vehicle the player is currently in.
@@ -61,4 +59,25 @@ RegisterCommand("him-getLivery", (_, cb) => {
   let livery = GetVehicleLivery(vehicle);
   console.log(livery)
   console.log(liveryCount)
+  cb({ livery, liveryCount })
 })
+
+RegisterNuiCallbackType('him-getLivery') // register the type
+// register a magic event name
+on('__cfx_nui:him-getLivery', (data, cb) => {
+  console.log(data);
+  const playerPed = PlayerPedId();
+
+  // Retrieve the vehicle the player is currently in.
+  const vehicle = GetVehiclePedIsIn(playerPed, false);
+
+  // Check if the vehicle exists in the game world.
+  if (!DoesEntityExist(vehicle)) {
+    // If the vehicle does not exist, end the execution of the code here.
+    return;
+  }
+
+  let liveryCount = GetVehicleLiveryCount(vehicle);
+  let livery = GetVehicleLivery(vehicle);
+  cb({ liveries: liveryCount, livery })
+});
