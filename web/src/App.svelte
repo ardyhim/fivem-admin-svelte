@@ -2,6 +2,7 @@
   import VisibilityProvider from './providers/VisibilityProvider.svelte';
   import HelloWorld from './components/AdminDashboard.svelte';
   import { debugData } from './utils/debugData';
+    import BennysMenu from './lib/components/bennys/BennysMenu.svelte';
 
   debugData([
     {
@@ -11,11 +12,10 @@
   ]);
 </script>
 
-<main>
-  <VisibilityProvider>
-    <div class="grid grid-cols-2 gap-4 place-items-end p-10">
-      <div></div>
-      <HelloWorld />
+<VisibilityProvider>
+  <div class="w-screen h-screen">
+    <div class="absolute bottom-0 w-auto h-48 border bg-opacity-40 backdrop-blur-md rounded drop-shadow-lg py-5">
+      <BennysMenu/>
     </div>
-  </VisibilityProvider>
-</main>
+  </div>
+</VisibilityProvider>
