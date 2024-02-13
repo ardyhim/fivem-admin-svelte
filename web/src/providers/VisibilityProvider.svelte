@@ -28,7 +28,7 @@
   });
 </script>
 
-<main class="w-full h-full">
+<main class="">
   {#if isVisible}
     <slot />
   {/if}
